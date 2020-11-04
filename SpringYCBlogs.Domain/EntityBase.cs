@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace SpringYCBlogs.Domain
 {
-    public class EntityBase
+    public class EntityBase<TPrimaryKey> where TPrimaryKey:struct
     {
         public EntityBase()
         {
-            this.Id = Guid.NewGuid();
-            CreateTime = DateTime.Now;
-            IsActived = true;
+            this.CreateTime = DateTime.Now;
+            this.IsActived = true;
         }
-        public Guid Id { get; set; }
+        public TPrimaryKey Id { get; set; }
 
         public DateTime CreateTime { get; set; }
 
