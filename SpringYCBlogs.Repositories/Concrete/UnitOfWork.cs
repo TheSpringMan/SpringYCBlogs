@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using SpringYCBlogs.Infrastructure.Abstract;
 
 namespace SpringYCBlogs.Infrastructure.Concrete
 {
-    public class UnitOfWork<TDbContext> : IUnitOfWork where TDbContext : DbContext
+    public class UnitOfWork: IUnitOfWork
     {
-        private readonly TDbContext _dbContext;
+        private readonly DbContext _dbContext;
 
-        public UnitOfWork(TDbContext dbContext)
+        public UnitOfWork(DbContext dbContext)
         {
             this._dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
