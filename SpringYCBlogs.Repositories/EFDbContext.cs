@@ -17,8 +17,20 @@ namespace SpringYCBlogs.Infrastructure
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Role> Roles { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>()
+                .HasMany<Role>(s => s.Roles)
+                .WithMany(x => x.Users)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("UserId");
+                    cs.MapRightKey("RoleId");
+                    cs.ToTable("UserRoles");
+                });
+
             base.OnModelCreating(modelBuilder);
         }
     }
